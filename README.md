@@ -13,3 +13,5 @@ Customizable: Though simple, the component is designed for easy customization an
 
 Contributing
 Contributions to enhance this project are welcome. Please feel free to fork, make changes, and open pull requests to improve the functionality or documentation.
+
+
