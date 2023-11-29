@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="assets/css/app.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div style="display: flex; justify-content: center; height: 100vh;">
+        <div style="font-weight: bold; width: 300px;"> 
+            <div style="display: grid;">
+                <input readonly class="mt-2" type="text" id="searchBoxRead">
+                <input class="mt-2" type="text" id="searchBox" placeholder="Arama yap..." oninput="searchTree()">
+            </div>
+    
+            <div style="max-height: 300px;"> 
+                <div id="tree-container" class="tree-view"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        var datalist = [
+            {
+                "name": "ÜST KATEGORİ 1",
+                "parentId": 0,
+                "id": 1
+            },
+            {
+                "name": "1.ALT KATEGORİ 2",
+                "parentId": 1,
+                "id": 2
+            },
+            {
+                "name": "2.ALT KATEGORİ 3",
+                "parentId": 2,
+                "id": 3
+            },
+            {
+                "name": "Örnek4",
+                "parentId": 3,
+                "id": 4
+            },
+            {
+                "name": "Örnek5",
+                "parentId": 3,
+                "id": 5
+            },
+            {
+                "name": "Örnek6",
+                "parentId": 3,
+                "id": 6
+            },
+            {
+                "name": "Örnek7",
+                "parentId": 3,
+                "id": 7
+            },
+            {
+                "name": "Örnek8",
+                "parentId": 3,
+                "id": 8
+            },
+            {
+                "name": "Örnek9",
+                "parentId": 3,
+                "id": 9
+            },
+            {
+                "name": "Örnek10",
+                "parentId": 3,
+                "id": 10
+            },
+            {
+                "name": "Örnek11",
+                "parentId": 3,
+                "id": 11
+            },
+            {
+                "name": "1.ALT KATEGORİ 12",
+                "parentId": 1,
+                "id": 12
+            },
+            {
+                "name": "2.ALT KATEGORİ 13",
+                "parentId": 12,
+                "id": 13
+            },
+            {
+                "name": "Örnek14",
+                "parentId": 13,
+                "id": 14
+            },
+            {
+                "name": "Örnek15",
+                "parentId": 13,
+                "id": 15
+            },
+            {
+                "name": "Örnek16",
+                "parentId": 13,
+                "id": 16
+            },
+            {
+                "name": "Örnek17",
+                "parentId": 13,
+                "id": 17
+            },
+            {
+                "name": "2.ALT KATEGORİ 18",
+                "parentId": 12,
+                "id": 18
+            },
+            {
+                "name": "Örnek19",
+                "parentId": 18,
+                "id": 19
+            },
+            {
+                "name": "Örnek20",
+                "parentId": 18,
+                "id": 20
+            },
+            {
+                "name": "Örnek21",
+                "parentId": 18,
+                "id": 21
+            },
+            {
+                "name": "Örnek22",
+                "parentId": 18,
+                "id": 22
+            },
+            {
+                "name": "2.ALT KATEGORİ 23",
+                "parentId": 12,
+                "id": 23
+            },
+            {
+                "name": "Örnek24",
+                "parentId": 23,
+                "id": 24
+            },
+            {
+                "name": "Örnek25",
+                "parentId": 23,
+                "id": 25
+            },
+            {
+                "name": "2.ALT KATEGORİ 26",
+                "parentId": 12,
+                "id": 26
+            },
+            {
+                "name": "Örnek27",
+                "parentId": 26,
+                "id": 27
+            },
+            {
+                "name": "Örnek28",
+                "parentId": 26,
+                "id": 28
+            },
+            {
+                "name": "Örnek29",
+                "parentId": 26,
+                "id": 29
+            },
+            {
+                "name": "2.ALT KATEGORİ 30",
+                "parentId": 42,
+                "id": 30
+            },
+            {
+                "name": "Örnek31",
+                "parentId": 30,
+                "id": 31
+            },
+            {
+                "name": "Örnek32",
+                "parentId": 30,
+                "id": 32
+            },
+            {
+                "name": "Örnek33",
+                "parentId": 30,
+                "id": 33
+            },
+            {
+                "name": "Örnek34",
+                "parentId": 30,
+                "id": 34
+            },
+            {
+                "name": "Örnek35",
+                "parentId": 30,
+                "id": 35
+            },
+            {
+                "name": "Örnek36",
+                "parentId": 30,
+                "id": 36
+            },
+            {
+                "name": "Örnek37",
+                "parentId": 30,
+                "id": 37
+            },
+            {
+                "name": "Örnek38",
+                "parentId": 30,
+                "id": 38
+            },
+            {
+                "name": "Örnek39",
+                "parentId": 30,
+                "id": 39
+            },
+            {
+                "name": "Örnek40",
+                "parentId": 30,
+                "id": 40
+            },
+            {
+                "name": "Örnek41",
+                "parentId": 30,
+                "id": 41
+            },
+            {
+                "name": "1.ALT KATEGORİ 42",
+                "parentId": 1,
+                "id": 42
+            },
+            {
+                "name": "2.ALT KATEGORİ 43",
+                "parentId": 42,
+                "id": 43
+            },
+            {
+                "name": "Örnek44",
+                "parentId": 43,
+                "id": 44
+            },
+            {
+                "name": "Örnek45",
+                "parentId": 43,
+                "id": 45
+            },
+            {
+                "name": "2.ALT KATEGORİ 46",
+                "parentId": 42,
+                "id": 46
+            },
+            {
+                "name": "Örnek47",
+                "parentId": 46,
+                "id": 47
+            },
+            {
+                "name": "Örnek48",
+                "parentId": 46,
+                "id": 48
+            },
+            {
+                "name": "Örnek49",
+                "parentId": 46,
+                "id": 49
+            },
+            {
+                "name": "Örnek50",
+                "parentId": 46,
+                "id": 50
+            },
+            {
+                "name": "Örnek51",
+                "parentId": 46,
+                "id": 51
+            },
+            {
+                "name": "Örnek52",
+                "parentId": 46,
+                "id": 52
+            },
+            {
+                "name": "Örnek53",
+                "parentId": 46,
+                "id": 53
+            },
+            {
+                "name": "Örnek54",
+                "parentId": 46,
+                "id": 54
+            },
+            {
+                "name": "Örnek55",
+                "parentId": 46,
+                "id": 55
+            },
+            {
+                "name": "1.ALT KATEGORİ 56",
+                "parentId": 1,
+                "id": 56
+            },
+            {
+                "name": "2.ALT KATEGORİ 57",
+                "parentId": 56,
+                "id": 57
+            },
+            {
+                "name": "Örnek58",
+                "parentId": 57,
+                "id": 58
+            },
+            {
+                "name": "Örnek59",
+                "parentId": 57,
+                "id": 59
+            },
+            {
+                "name": "Örnek60",
+                "parentId": 57,
+                "id": 60
+            },
+            {
+                "name": "Örnek61",
+                "parentId": 57,
+                "id": 61
+            },
+            {
+                "name": "Örnek62",
+                "parentId": 57,
+                "id": 62
+            },
+            {
+                "name": "Örnek63",
+                "parentId": 57,
+                "id": 63
+            },
+            {
+                "name": "Örnek64",
+                "parentId": 57,
+                "id": 64
+            },
+            {
+                "name": "Örnek65",
+                "parentId": 57,
+                "id": 65
+            },
+            {
+                "name": "Örnek66",
+                "parentId": 57,
+                "id": 66
+            },
+            {
+                "name": "2.ALT KATEGORİ 67",
+                "parentId": 56,
+                "id": 67
+            },
+            {
+                "name": "Örnek68",
+                "parentId": 67,
+                "id": 68
+            },
+            {
+                "name": "Örnek69",
+                "parentId": 67,
+                "id": 69
+            },
+            {
+                "name": "Örnek70",
+                "parentId": 67,
+                "id": 70
+            },
+            {
+                "name": "Örnek71",
+                "parentId": 67,
+                "id": 71
+            },
+            {
+                "name": "Örnek72",
+                "parentId": 67,
+                "id": 72
+            },
+            {
+                "name": "2.ALT KATEGORİ 73",
+                "parentId": 56,
+                "id": 73
+            },
+            {
+                "name": "Örnek74",
+                "parentId": 73,
+                "id": 74
+            },
+            {
+                "name": "Örnek75",
+                "parentId": 73,
+                "id": 75
+            },
+            {
+                "name": "Örnek76",
+                "parentId": 73,
+                "id": 76
+            },
+            {
+                "name": "Örnek77",
+                "parentId": 73,
+                "id": 77
+            },
+            {
+                "name": "Örnek78",
+                "parentId": 73,
+                "id": 78
+            },
+            {
+                "name": "Örnek79",
+                "parentId": 73,
+                "id": 79
+            },
+            {
+                "name": "Örnek80",
+                "parentId": 73,
+                "id": 80
+            },
+            {
+                "name": "2.ALT KATEGORİ 81",
+                "parentId": 56,
+                "id": 81
+            },
+            {
+                "name": "Örnek82",
+                "parentId": 81,
+                "id": 82
+            },
+            {
+                "name": "Örnek83",
+                "parentId": 81,
+                "id": 83
+            },
+            {
+                "name": "Örnek84",
+                "parentId": 81,
+                "id": 84
+            },
+            {
+                "name": "Örnek85",
+                "parentId": 81,
+                "id": 85
+            },
+            {
+                "name": "Örnek86",
+                "parentId": 81,
+                "id": 86
+            },
+            {
+                "name": "2.ALT KATEGORİ 87",
+                "parentId": 56,
+                "id": 87
+            },
+            {
+                "name": "Örnek88",
+                "parentId": 87,
+                "id": 88
+            },
+            {
+                "name": "Örnek89",
+                "parentId": 87,
+                "id": 89
+            },
+            {
+                "name": "Örnek90",
+                "parentId": 87,
+                "id": 90
+            },
+            {
+                "name": "Örnek91",
+                "parentId": 87,
+                "id": 91
+            },
+            {
+                "name": "2.ALT KATEGORİ 92",
+                "parentId": 56,
+                "id": 92
+            },
+            {
+                "name": "Örnek93",
+                "parentId": 92,
+                "id": 93
+            },
+            {
+                "name": "2.ALT KATEGORİ 94",
+                "parentId": 56,
+                "id": 94
+            },
+            {
+                "name": "Örnek95",
+                "parentId": 94,
+                "id": 95
+            },
+            {
+                "name": "Örnek96",
+                "parentId": 94,
+                "id": 96
+            },
+            {
+                "name": "Örnek97",
+                "parentId": 94,
+                "id": 97
+            },
+            {
+                "name": "Örnek98",
+                "parentId": 94,
+                "id": 98
+            },
+            {
+                "name": "2.ALT KATEGORİ 99",
+                "parentId": 56,
+                "id": 99
+            },
+            {
+                "name": "Örnek100",
+                "parentId": 99,
+                "id": 100
+            },
+            {
+                "name": "Örnek101",
+                "parentId": 99,
+                "id": 101
+            },
+            {
+                "name": "Örnek102",
+                "parentId": 99,
+                "id": 102
+            },
+            {
+                "name": "ÜST KATEGORİ 2",
+                "parentId": 0,
+                "id": 103
+            },
+            {
+                "name": "1.ALT KATEGORİ 104",
+                "parentId": 103,
+                "id": 104
+            },
+            {
+                "name": "Örnek105",
+                "parentId": 104,
+                "id": 105
+            },
+            {
+                "name": "Örnek106",
+                "parentId": 104,
+                "id": 106
+            },
+            {
+                "name": "Örnek107",
+                "parentId": 104,
+                "id": 107
+            },
+            {
+                "name": "Örnek108",
+                "parentId": 104,
+                "id": 108
+            },
+            {
+                "name": "Örnek109",
+                "parentId": 104,
+                "id": 109
+            },
+            {
+                "name": "1.ALT KATEGORİ 110",
+                "parentId": 103,
+                "id": 110
+            },
+            {
+                "name": "Örnek111",
+                "parentId": 110,
+                "id": 111
+            },
+            {
+                "name": "Örnek112",
+                "parentId": 110,
+                "id": 112
+            },
+            {
+                "name": "Örnek113",
+                "parentId": 110,
+                "id": 113
+            },
+            {
+                "name": "Örnek114",
+                "parentId": 110,
+                "id": 114
+            },
+            {
+                "name": "Örnek115",
+                "parentId": 110,
+                "id": 115
+            },
+            {
+                "name": "Örnek116",
+                "parentId": 110,
+                "id": 116
+            },
+            {
+                "name": "ÜST KATEGORİ 3",
+                "parentId": 0,
+                "id": 117
+            },
+            {
+                "name": "Örnek118",
+                "parentId": 117,
+                "id": 118
+            },
+            {
+                "name": "Örnek119",
+                "parentId": 117,
+                "id": 119
+            },
+            {
+                "name": "Örnek120",
+                "parentId": 117,
+                "id": 120
+            },
+            {
+                "name": "Örnek121",
+                "parentId": 117,
+                "id": 121
+            },
+            {
+                "name": "ÜST KATEGORİ 4",
+                "parentId": 0,
+                "id": 122
+            },
+            {
+                "name": "ÜST KATEGORİ 5",
+                "parentId": 0,
+                "id": 123
+            },
+            {
+                "name": "ÜST KATEGORİ 6",
+                "parentId": 0,
+                "id": 124
+            },
+            {
+                "name": "ÜST KATEGORİ 7",
+                "parentId": 0,
+                "id": 125
+            },
+            {
+                "name": "ÜST KATEGORİ 8",
+                "parentId": 0,
+                "id": 126
+            },
+            {
+                "name": "Örnek127",
+                "parentId": 18,
+                "id": 128
+            },
+            {
+                "name": "Örnek128",
+                "parentId": 18,
+                "id": 129
+            },
+            {
+                "name": "Örnek129",
+                "parentId": 18,
+                "id": 130
+            },
+            {
+                "name": "Örnek130",
+                "parentId": 73,
+                "id": 131
+            },
+            {
+                "name": "ÜST KATEGORİ 9",
+                "parentId": 0,
+                "id": 132
+            },
+            {
+                "name": "Örnek132",
+                "parentId": 104,
+                "id": 133
+            },
+            {
+                "name": "Örnek133",
+                "parentId": 104,
+                "id": 134
+            },
+            {
+                "name": "Örnek134",
+                "parentId": 104,
+                "id": 135
+            },
+            {
+                "name": "Örnek135",
+                "parentId": 104,
+                "id": 136
+            },
+            {
+                "name": "Örnek136",
+                "parentId": 104,
+                "id": 137
+            },
+            {
+                "name": "Örnek137",
+                "parentId": 104,
+                "id": 138
+            },
+            {
+                "name": "Örnek138",
+                "parentId": 104,
+                "id": 139
+            },
+            {
+                "name": "Örnek139",
+                "parentId": 104,
+                "id": 140
+            },
+            {
+                "name": "Örnek140",
+                "parentId": 104,
+                "id": 141
+            },
+            {
+                "name": "Örnek141",
+                "parentId": 104,
+                "id": 142
+            },
+            {
+                "name": "Örnek142",
+                "parentId": 104,
+                "id": 143
+            },
+            {
+                "name": "Örnek143",
+                "parentId": 104,
+                "id": 144
+            },
+            {
+                "name": "Örnek144",
+                "parentId": 104,
+                "id": 145
+            }
+        ]
+        const treeHTML = buildTree(datalist);
+        appendTreeToDOM(treeHTML, 'tree-container');
+
+
+
+        document.getElementById('searchBox').addEventListener('input', function () {
+            const searchTerm = this.value.toLowerCase();
+
+            if (searchTerm === '') {
+                resetTree();
+            } else {
+                searchTree();
+            }
+        });
+
+        function resetTree() {
+            const allItems = document.querySelectorAll('.tree-view li');
+            allItems.forEach(item => {
+                item.style.display = 'block';
+               
+                const uls = item.querySelectorAll('ul');
+                uls.forEach(ul => {
+                    ul.style.display = 'none'; 
+                    updateIcon(ul.parentElement, false); 
+
+                });
+            });
+        }
+
+
+        function searchTree() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const allItems = document.querySelectorAll('.tree-view li');
+
+            allItems.forEach(item => {
+                const itemText = item.textContent.toLowerCase();
+                const isMatch = itemText.includes(searchTerm);
+
+                if (isMatch) {
+                    item.style.display = 'block';
+                    expandParentNodes(item);
+                    updateIcon(item, true); 
+
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function updateIcon(element, expanded) {
+            const icon = element.querySelector('span');
+            if (icon) {
+                if (icon.classList.contains('bxs-folder-plus') || icon.classList.contains('bxs-folder-minus')) {
+                    icon.classList.remove('bxs-folder-plus', 'bxs-folder-minus');
+                    icon.classList.add(expanded ? 'bxs-folder-minus' : 'bxs-folder-plus');
+                }
+            }
+        }
+
+        function expandParentNodes(element) {
+            while (element && element.tagName !== 'BODY') {
+                if (element.tagName === 'UL') {
+                    element.style.display = 'block';
+                }
+                element = element.parentElement;
+            }
+        }
+
+
+        // Ağacı oluşturan fonksiyon
+        function buildTree(data, rootId = 0, isRoot = true) {
+            let treeHTML = isRoot ? "<ul style='list-style: none;'>" : "<ul style='list-style: none; display: none;'>";
+
+            const rootElements = data.filter(item => item.parentId === rootId);
+
+            for (const element of rootElements) {
+                const hasChildren = data.some(item => item.parentId === element.id);
+                const listItemClass = isRoot ? 'root-item' : 'child-item';
+                treeHTML += `<li class="${listItemClass}" data-id="${element.id}" onclick="itemClicked(event, ${element.id}, ${hasChildren})">`;
+
+                const iconClass = hasChildren ? 'bx bxs-folder-plus' : 'bx bx-time-five';
+                treeHTML += `<span class="${iconClass}" onclick="toggleChildrenVisibility(event, ${element.id}, ${hasChildren})"></span>${element.name}`;
+
+                if (hasChildren) {
+                    treeHTML += buildTree(data, element.id, false);
+                }
+
+                treeHTML += '</li>';
+            }
+
+            treeHTML += '</ul>';
+            return treeHTML;
+        }
+        function itemClicked(event, id, hasChildren) {
+            event.stopPropagation();
+
+            const listItem = event.target.closest('li'); 
+            const iconSpan = listItem.querySelector('span');
+
+            if (hasChildren) {
+                const childrenList = listItem.querySelector('ul');
+                if (childrenList) {
+                    const isExpanded = childrenList.style.display !== 'none';
+                    childrenList.style.display = isExpanded ? 'none' : 'block';
+
+                    // İkon sınıfını değiştir
+                    if (isExpanded) {
+                        iconSpan.classList.remove('bxs-folder-minus');
+                        iconSpan.classList.add('bxs-folder-plus');
+                    } else {
+                        iconSpan.classList.remove('bxs-folder-plus');
+                        iconSpan.classList.add('bxs-folder-minus');
+                    }
+                }
+            } else {
+                setActive(listItem);
+                var selectedItem = document.getElementById("searchBoxRead");
+                datalist.forEach(element => {
+                    if (element.id == id) {
+                        selectedItem.value = element.name
+                    }
+                });
+
+                console.log("Seçilen öğenin ID'si: ", id);
+            }
+        }
+
+        function setActive(element) {
+            const previouslyActive = document.querySelector('.tree-view .active');
+            if (previouslyActive) {
+                previouslyActive.classList.remove('active');
+            }
+            element.classList.add('active');
+        }
+
+        function toggleChildrenVisibility(event, parentId, hasChildren) {
+            event.stopPropagation();
+
+            const childrenList = document.querySelector(`[data-id="${parentId}"] > ul`);
+            const icon = document.querySelector(`[data-id="${parentId}"] > .bx`);
+            if (childrenList) {
+                childrenList.style.display = childrenList.style.display === 'none' ? 'block' : 'none';
+                if (icon) {
+                    if (hasChildren) {
+                        icon.className = childrenList.style.display === 'block' ? 'bx bxs-folder-minus' : 'bx bxs-folder-plus';
+                    }
+                }
+            }
+        }
+
+        // Ağacı DOM'a ekleme
+        function appendTreeToDOM(treeHTML, containerId) {
+
+            debugger
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = treeHTML;
+            } else {
+                console.error("Container not found");
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

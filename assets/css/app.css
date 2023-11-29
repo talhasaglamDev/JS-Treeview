@@ -1,0 +1,89 @@
+#searchBox {
+  padding: 10px;
+  margin-bottom: 10px;
+  outline: none;
+  background-color: #F1F3F4;
+  border: 1px solid #F1F3F4;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+
+}
+
+#searchBoxRead {
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  outline: none;
+  background-color: #176B87;
+  border: 1px solid #F1F3F4;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+
+}
+
+.tree-view {
+  height: 900px;
+  /* Sabit yükseklik */
+  overflow-y: auto;
+  /* İçerik yüksekliği 300px'i aştığında dikey scroll bar göster */
+  font-family: 'Poppins', sans-serif;
+}
+
+.tree-view .root-item {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tree-view .child-item {
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.tree-view li {
+  list-style-type: none;
+  margin: 5px 0;
+  cursor: pointer;
+  position: relative;
+}
+
+
+.tree-view .active {
+  background-color: #e0e0e0;
+  color: #000;
+
+}
+
+.tree-view ul {
+  align-items: center;
+  list-style-type: none;
+  cursor: pointer;
+  padding-left: 20px;
+
+}
+
+.bxs-folder-plus {
+  cursor: pointer;
+  margin-right: 5px;
+  color: #EFB003;
+  font-size: 20px;
+  align-items: center;
+
+}
+
+.bxs-folder-minus {
+  cursor: pointer;
+  margin-right: 5px;
+  color: #EFB003;
+  font-size: 20px;
+  align-items: center;
+
+}
+
+.bx-time-five {
+  margin-right: 5px;
+  cursor: pointer;
+  color: green;
+}
