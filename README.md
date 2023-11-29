@@ -13,5 +13,3 @@ Customizable: Though simple, the component is designed for easy customization an
 
 Contributing
 Contributions to enhance this project are welcome. Please feel free to fork, make changes, and open pull requests to improve the functionality or documentation.
-
-<iframe width="560" height="315" src="/assets/video/Treeview-video.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
